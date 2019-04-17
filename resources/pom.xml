@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <artifactId>education-starter</artifactId>
+        <groupId>com.ortecfinance.education</groupId>
+        <version>2019-SNAPSHOT</version>
+    </parent>
+
+    <name>Education - Resources</name>
+    <artifactId>resources</artifactId>
+    <packaging>pom</packaging>
+
+    <profiles>
+        <profile>
+            <id>build-resources</id>
+            <activation>
+                <property>
+                    <name>performRelease</name>
+                    <value>true</value>
+                </property>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>com.ortecfinance.owf</groupId>
+                        <artifactId>maven-merge-file-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <inherited>false</inherited>
+                                <id>merge-release-notes</id>
+                                <phase>process-resources</phase>
+                                <goals>
+                                    <goal>merge</goal>
+                                </goals>
+                                <configuration>
+                                    <merges>
+                                        <merge>
+                                            <targetFile>SQL/education_total_with_testdata_${project.releaseversion}.sql
+                                            </targetFile>
+                                            <sourceDirs>
+                                                <sourceDir>SQL/General/prologue</sourceDir>
+                                                <sourceDir>SQL/${project.releaseversion}/STRUCTURE</sourceDir>
+                                                <sourceDir>SQL/${project.releaseversion}/DATA</sourceDir>
+                                                <sourceDir>SQL/General/epilogue</sourceDir>
+                                            </sourceDirs>
+                                            <nameContainsOrderings>
+                                                <nameContainsOrdering>prologue</nameContainsOrdering>
+                                            </nameContainsOrderings>
+                                            <includes>
+                                                <include>*.sql,*.SQL</include>
+                                            </includes>
+                                            <separator>\n\n\n/*******************************\n
+                                                #{parent.name}/#{file.name} \n*******************************/\n\n
+                                                prompt #{file.name}\n
+                                            </separator>
+                                            <encoding>UTF-8</encoding>
+                                        </merge>
+
+                                        <merge>
+                                            <targetFile>SQL/education_total_${project.releaseversion}.sql</targetFile>
+                                            <sourceDirs>
+                                                <sourceDir>SQL/General/prologue</sourceDir>
+                                                <sourceDir>SQL/${project.releaseversion}/STRUCTURE</sourceDir>
+                                                <sourceDir>SQL/General/epilogue</sourceDir>
+                                            </sourceDirs>
+                                            <nameContainsOrderings>
+                                                <nameContainsOrdering>prologue</nameContainsOrdering>
+                                            </nameContainsOrderings>
+                                            <includes>
+                                                <include>*.sql,*.SQL</include>
+                                            </includes>
+                                            <separator>\n\n\n/*******************************\n
+                                                #{parent.name}/#{file.name} \n*******************************/\n\n
+                                                prompt #{file.name}\n
+                                            </separator>
+                                            <encoding>UTF-8</encoding>
+                                        </merge>
+                                    </merges>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+
+                    <plugin>
+                        <artifactId>maven-assembly-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>make-assembly</id>
+                                <phase>package</phase>
+                                <configuration>
+                                    <descriptors>
+                                        <descriptor>assembly-bundle.xml</descriptor>
+                                    </descriptors>
+                                </configuration>
+                                <goals>
+                                    <goal>single</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
+</project>

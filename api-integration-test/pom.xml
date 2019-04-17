@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>education-starter</artifactId>
+        <groupId>com.ortecfinance.education</groupId>
+        <version>2019-SNAPSHOT</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>api-integration-test</artifactId>
+    <name>Education - API Integration Test</name>
+
+    <properties>
+        <skip.tests>true</skip.tests>
+        <api.port>7001</api.port>
+        <api.host>localhost</api.host>
+        <api.protocol>http</api.protocol>
+        <api.path>/education</api.path>
+
+        <maven-failsafe-plugin.version>3.0.0-M1</maven-failsafe-plugin.version>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.ortecfinance.education</groupId>
+            <artifactId>logger</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.ortecfinance.education</groupId>
+            <artifactId>api</artifactId>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-failsafe-plugin</artifactId>
+                <version>${maven-failsafe-plugin.version}</version>
+                <configuration>
+                    <argLine>-Xmx1024m</argLine>
+                    <argLine>-Dfile.encoding=UTF-8</argLine>
+                    <argLine>-Duser.language=nl</argLine>
+                    <argLine>${failsafeArgLine}</argLine>
+                    <systemPropertyVariables>
+                        <remApi.protocol>${api.protocol}</remApi.protocol>
+                        <remApi.host>${api.host}</remApi.host>
+                        <remApi.port>${api.port}</remApi.port>
+                        <remApi.path>${api.path}</remApi.path>
+                    </systemPropertyVariables>
+                    <encoding>UTF-8</encoding>
+                    <detail>true</detail>
+                    <skipTests>${skip.tests}</skipTests>
+                </configuration>
+
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>integration-test</goal>
+                            <goal>verify</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+</project>

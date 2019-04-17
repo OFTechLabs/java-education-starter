@@ -1,0 +1,12 @@
+{
+  "name": "education-docs",
+  "version": "1.0.0",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "generate-documentation-pdfs": "markdown-pdf --css-path github.css installation_guide.md | markdown-pdf --css-path github.css release_notes.md"
+  },
+  "devDependencies": {
+    "markdown-pdf": "github:purtuga/markdown-pdf#master"
+  }
+}

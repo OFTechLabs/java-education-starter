@@ -1,0 +1,21 @@
+<assembly xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xmlns="http://maven.apache.org/plugins/maven-assembly-plugin/assembly/1.1.2"
+          xsi:schemaLocation="http://maven.apache.org/plugins/maven-assembly-plugin/assembly/1.1.2 http://maven.apache.org/xsd/assembly-1.1.2.xsd">
+    <includeBaseDirectory>false</includeBaseDirectory>
+    <formats>
+        <format>zip</format>
+    </formats>
+
+    <fileSets>
+        <fileSet>
+            <directory>./</directory>
+            <outputDirectory>../</outputDirectory>
+            <includes>
+                <include>docs/*.md</include>
+                <include>docs/*.pdf</include>
+                <include>SQL/*total_${project.releaseversion}.sql</include>
+            </includes>
+        </fileSet>
+    </fileSets>
+
+</assembly>

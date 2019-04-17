@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<weblogic-web-app xmlns="http://xmlns.oracle.com/weblogic/weblogic-web-app">
+    <context-root>/education</context-root>
+
+    <!-- override container classes -->
+    <container-descriptor>
+        <prefer-application-packages>
+            <package-name>org.slf4j.*</package-name>
+            <package-name>com.google.common.*</package-name>
+            <package-name>com.fasterxml.jackson.*</package-name>
+            <package-name>org.apache.commons.io.*</package-name>
+            <package-name>org.apache.commons.lang3.*</package-name>
+        </prefer-application-packages>
+        <prefer-application-resources>
+            <resource-name>org/slf4j/impl/StaticLoggerBinder.class</resource-name>
+        </prefer-application-resources>
+    </container-descriptor>
+
+    <charset-params>
+        <input-charset>
+            <resource-path>/*</resource-path>
+            <java-charset-name>UTF-8</java-charset-name>
+        </input-charset>
+    </charset-params>
+</weblogic-web-app>
