@@ -29,7 +29,10 @@
         <maven.version>3.5.2</maven.version>
         <java-version>1.8</java-version>
 
+        <!-- persistence versions -->
         <querydsl.version>4.2.1</querydsl.version>
+        <codegen.version>0.6.8</codegen.version>
+        <mysema-commons-lang.version>0.2.4</mysema-commons-lang.version>
         <jackson.version>2.9.5</jackson.version>
 
         <jacoco-maven-plugin.version>0.8.0</jacoco-maven-plugin.version>
@@ -60,6 +63,7 @@
         <maven-deploy-plugin.version>3.0.0-M1</maven-deploy-plugin.version>
         <maven-install-plugin.version>3.0.0-M1</maven-install-plugin.version>
         <maven-site-plugin.version>3.7.1</maven-site-plugin.version>
+        <apt-maven-plugin.version>1.1.3</apt-maven-plugin.version>
 
         <maven.build.timestamp.format>dd-MM-yyyy - HH:mm</maven.build.timestamp.format>
         <build.date>${maven.build.timestamp}</build.date>
@@ -118,6 +122,50 @@
                 <groupId>com.ortecfinance.education</groupId>
                 <artifactId>logger</artifactId>
                 <version>${project.version}</version>
+            </dependency>
+
+            <!-- Mysema -->
+            <dependency>
+                <groupId>com.querydsl</groupId>
+                <artifactId>querydsl-codegen</artifactId>
+                <version>${querydsl.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.querydsl</groupId>
+                <artifactId>querydsl-core</artifactId>
+                <version>${querydsl.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>com.google.code.findbugs</groupId>
+                        <artifactId>jsr305</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+            <dependency>
+                <groupId>com.querydsl</groupId>
+                <artifactId>querydsl-jpa</artifactId>
+                <version>${querydsl.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <artifactId>slf4j-api</artifactId>
+                        <groupId>org.slf4j</groupId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+            <dependency>
+                <groupId>com.querydsl</groupId>
+                <artifactId>querydsl-apt</artifactId>
+                <version>${querydsl.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.mysema.codegen</groupId>
+                <artifactId>codegen</artifactId>
+                <version>${codegen.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.mysema.commons</groupId>
+                <artifactId>mysema-commons-lang</artifactId>
+                <version>${mysema-commons-lang.version}</version>
             </dependency>
 
             <!-- Other -->
