@@ -9,11 +9,12 @@ import javax.servlet.annotation.WebListener;
 
 @WebListener
 public class AppListener implements ServletContextListener {
+
     private static final Logger LOGGER = LoggerFactory.getLogger(AppListener.class);
 
     @Override
     public void contextInitialized(ServletContextEvent servletContextEvent) {
-
+        LOGGER.info("Started!");
     }
 
     @Override
