@@ -4,8 +4,8 @@ import javax.ws.rs.core.Application;
 import java.util.HashSet;
 import java.util.Set;
 
-
-public abstract class ApplicationConfig extends Application {
+@javax.ws.rs.ApplicationPath("api")
+public class ApplicationConfig extends Application {
 
     @Override
     public Set<Class<?>> getClasses() {
