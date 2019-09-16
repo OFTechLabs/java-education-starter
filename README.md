@@ -15,6 +15,69 @@ microservice-root
 --web                           This is where the artifact is combined and created for deployment
 ```
 
+## Weblogic Server Setup
+
+Note: the context root in `weblogic.xml` is: `/education` so the URL after deploying locally is: `http://localhost:7001/education`
+
+Tip: Do this part with your coach, because they have done it many times.
+
+### Setup run configuration (Intellij)
+
+1. Open cloned GIt repo in Intellij
+1. Click edit configuration (next to run button)
+1. Click `+` to add a configuration for the Application Server
+1. Add your local WLS doman to the `domainpath` for example: `D:\Oracle\Middleware_*\user_projects\base_domain`
+1. Add the username and password for the admin user which was configured during the WLS installation
+1. In the deployment tab, click add and add the `web:war`
+1. Apply
+
+### Building the starter
+
+To build the starter run `clean install` on the root project through Maven in Intellij, or in the terminal run:
+
+```
+mvn clean install -U
+```
+
+Make sure the build command is run on the root folder.
+
+### Run
+
+Now run the build deployment using the Run configuration (top right), navigate to:
+ 
+```
+http://localhost:7001/education/api/dummy
+``` 
+in the browser when it is running. You should get the following response:
+
+```
+cdi-injected
+```
+
+If you get the correct response, feel free to start the exercises, ask your coach to help you with the setup part until you get the correct response. 
+
+### Extra: debug configuration
+
+If you are comfortable using the Java debugger in Intellij, here is how to configure it for the exercises. If you have not used a debugger before, just skip this step for now, it is not essential.
+
+#### JVM arguments
+
+Edit the WLS run configuration with the following VM options:
+
+```
+-server -Xrs -Xdebug -Xnoagent -Xrunjdwp:transport=dt_socket,address=3999,server=y,suspend=n -Djava.compiler=NONE
+```
+
+#### Debug run configuration
+
+1. Go to the run configuration in the top right (Same as Weblogic)
+1. Click `+` and choose `Remote`
+1. Give it a name such as `Debug`
+1. Change the port to `3999` (same as in VM options)
+1. Apply
+
+To debug: select the debug option and click the debug icon (default keyboard shortcut: Shift+F9) 
+
 ## JPA Exercies
 
 Hints for the JPA Exercises:
